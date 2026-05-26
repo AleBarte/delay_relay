@@ -2,24 +2,24 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>delay_relay</name>
-  <version>0.1.0</version>
+  <version>0.3.0</version>
   <description>
-    ROS 2 node that forwards a Float64MultiArray topic after a
-    configurable delay. Intended for use in MMT (Modular / Mechatronic
-    Test) setups where simulated latency is required.
+    ROS 2 package for MMT setups.
+    - delay_relay_node : forwards Float64MultiArray after a configurable delay.
+    - init_node        : drives the local arm to the remote arm's joint positions
+                         via a proportional velocity controller, then destroys
+                         the publisher once converged.
   </description>
 
   <maintainer email="your@email.com">Your Name</maintainer>
   <license>Apache-2.0</license>
 
-  <!-- build -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- runtime -->
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
 
-  <!-- test -->
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
