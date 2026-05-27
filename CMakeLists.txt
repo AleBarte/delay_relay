@@ -46,11 +46,45 @@ target_link_libraries(init_node init_lib)
 ament_target_dependencies(init_node rclcpp)
 
 # ============================================================================
+# 3. forward_torque_init_node
+# ============================================================================
+add_library(forward_torque_init_lib SHARED
+  src/forward_torque_init_node.cpp
+)
+target_include_directories(forward_torque_init_lib PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(forward_torque_init_lib rclcpp std_msgs sensor_msgs)
+
+add_executable(forward_torque_init_node src/main_forward_torque_init.cpp)
+target_link_libraries(forward_torque_init_node forward_torque_init_lib)
+ament_target_dependencies(forward_torque_init_node rclcpp)
+
+# ============================================================================
+# 4. forward_torque_delay_relay_node
+# ============================================================================
+add_library(forward_torque_delay_relay_lib SHARED
+  src/forward_torque_delay_relay_node.cpp
+)
+target_include_directories(forward_torque_delay_relay_lib PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(forward_torque_delay_relay_lib rclcpp std_msgs sensor_msgs)
+
+add_executable(forward_torque_delay_relay_node src/main_forward_torque_delay_relay.cpp)
+target_link_libraries(forward_torque_delay_relay_node forward_torque_delay_relay_lib)
+ament_target_dependencies(forward_torque_delay_relay_node rclcpp)
+
+# ============================================================================
 # Install
 # ============================================================================
 install(TARGETS
   delay_relay_lib delay_relay_node
   init_lib        init_node
+  forward_torque_init_lib        forward_torque_init_node
+  forward_torque_delay_relay_lib forward_torque_delay_relay_node
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

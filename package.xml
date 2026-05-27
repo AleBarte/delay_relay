@@ -9,6 +9,10 @@
     - init_node        : drives the local arm to the remote arm's joint positions
                          via a proportional velocity controller, then destroys
                          the publisher once converged.
+    - forward_torque_delay_relay_node : delayed joint-state PD tracking for
+                         Franka forward_torque_controller command topics.
+    - forward_torque_init_node        : torque-based PD initialization for the
+                         Franka/model forward_torque_controller setup.
   </description>
 
   <maintainer email="your@email.com">Your Name</maintainer>
